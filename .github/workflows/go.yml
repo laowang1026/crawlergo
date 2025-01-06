@@ -4,6 +4,7 @@ on:
   push:
     tags:
       - 'v*' # 当有符合v*格式的标签被推送时触发
+  workflow_dispatch: # 添加手动触发条件
 
 jobs:
   build-and-release:
