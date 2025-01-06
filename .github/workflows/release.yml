@@ -1,10 +1,10 @@
-name: Go Build and Release
+name: Build and Release
 
 on:
-  workflow_dispatch:  # 手动触发工作流
+  workflow_dispatch:  # 手动触发
   push:
     tags:
-      - 'v*'  # 只在以 'v' 开头的标签推送时触发
+      - 'v*'  # 仅在以 'v' 开头的标签推送时触发
 
 jobs:
   build:
@@ -19,10 +19,11 @@ jobs:
       with:
         go-version: '1.20'  # 指定 Go 版本
 
-    - name: Build for Linux amd64
-      run: |
-        cd cmd/crawlergo
-        GOOS=linux GOARCH=amd64 go build -o crawlergo main.go
+    - name: Install Make
+      run: sudo apt-get install -y make  # 安装 make 工具
+
+    - name: Build with Makefile
+      run: make build_all  # 使用 Makefile 中的 build_all 目标
 
     - name: Create Release
       id: create_release
@@ -30,6 +31,10 @@ jobs:
       with:
         tag_name: ${{ github.ref }}
         files: |
-          cmd/crawlergo/crawlergo
+          bin/linux-amd64/*
+          bin/linux-arm64/*
+          bin/darwin-amd64/*
+          bin/darwin-arm64/*
+          bin/windows-amd64/*
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
