@@ -1,0 +1,50 @@
+name: Go Linux amd64 Build and Release
+
+on:
+  push:
+    tags:
+      - 'v*' # 当有符合v*格式的标签被推送时触发
+
+jobs:
+  build-and-release:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Go
+      uses: actions/setup-go@v4
+      with:
+        go-version: '1.20'
+
+    - name: Clean build cache
+      run: go clean -cache
+
+    - name: Build for Linux amd64
+      run: |
+        GOOS=linux GOARCH=amd64 go build -o crawlergo-linux-amd64 ./cmd/crawlergo
+
+    - name: Create Release
+      if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v')
+      id: create_release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: ${{ github.ref }}
+        release_name: Release ${{ github.ref }}
+        draft: false
+        prerelease: false
+
+    - name: Upload Release Asset
+      if: steps.create_release.outcome == 'success'
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ./crawlergo-linux-amd64
+        asset_name: crawlergo-linux-amd64
+        asset_content_type: application/octet-stream
+
