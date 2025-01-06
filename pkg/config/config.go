@@ -7,11 +7,11 @@ import (
 )
 
 const (
-	DefaultUA               = "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.0 Safari/537.36"
+	DefaultUA               = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.6778.140 Safari/537.36"
 	MaxTabsCount            = 10
 	TabRunTimeout           = 20 * time.Second
-	DefaultInputText        = "Crawlergo"
-	FormInputKeyword        = "Crawlergo"
+	DefaultInputText        = "test123"
+	FormInputKeyword        = "test123"
 	SuspectURLRegex         = `(?:"|')(((?:[a-zA-Z]{1,10}://|//)[^"'/]{1,}\.[a-zA-Z]{2,}[^"']{0,})|((?:/|\.\./|\./)[^"'><,;|*()(%%$^/\\\[\]][^"'><,;|()]{1,})|([a-zA-Z0-9_\-/]{1,}/[a-zA-Z0-9_\-/]{1,}\.(?:[a-zA-Z]{1,4}|action)(?:[\?|#][^"|']{0,}|))|([a-zA-Z0-9_\-/]{1,}/[a-zA-Z0-9_\-/]{3,}(?:[\?|#][^"|']{0,}|))|([a-zA-Z0-9_\-]{1,}\.(?:php|asp|aspx|jsp|json|action|html|js|txt|xml)(?:[\?|#][^"|']{0,}|)))(?:"|')`
 	URLRegex                = `((https?|ftp|file):)?//[-A-Za-z0-9+&@#/%?=~_|!:,.;]+[-A-Za-z0-9+&@#/%=~_|]`
 	AttrURLRegex            = ``
@@ -101,19 +101,19 @@ type ContinueResourceList []string
 var InputTextMap = map[string]map[string]interface{}{
 	"mail": {
 		"keyword": []string{"mail"},
-		"value":   "crawlergo@gmail.com",
+		"value":   "test123@gmail.com",
 	},
 	"code": {
 		"keyword": []string{"yanzhengma", "code", "ver", "captcha"},
-		"value":   "123a",
+		"value":   "a123aa",
 	},
 	"phone": {
 		"keyword": []string{"phone", "number", "tel", "shouji"},
-		"value":   "18812345678",
+		"value":   "18888888888",
 	},
 	"username": {
 		"keyword": []string{"name", "user", "id", "login", "account"},
-		"value":   "crawlergo@gmail.com",
+		"value":   "test123@gmail.com",
 	},
 	"password": {
 		"keyword": []string{"pass", "pwd"},
