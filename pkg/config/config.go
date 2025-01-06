@@ -88,7 +88,7 @@ var (
 
 var (
 	ScriptSuffix = []string{
-		"php", "asp", "jsp", "asa", "action", "do"
+		"php", "asp", "jsp", "asa", "action", "do",
 	}
 	ScriptSuffixSet mapset.Set
 )
